@@ -1,16 +1,50 @@
-# QuantumGucci
-Quantum Image classifier 
+theta = pi/2  # all pixels white
+qc1 = QuantumCircuit(3)
+
+qc1.h(0)
+qc1.h(1)
+
+qc1.barrier()
+#Pixel 1
+
+qc1.cry(theta,0,2)
+qc1.cx(0,1)
+qc1.cry(-theta,1,2)
+qc1.cx(0,1)
+qc1.cry(theta,1,2)
+
+qc1.barrier()
+#Pixel 2
+
+qc1.x(1)
+
+qc1.cry(theta,0,2)
+qc1.cx(0,1)
+qc1.cry(-theta,1,2)
+qc1.cx(0,1)
+qc1.cry(theta,1,2)
+
+qc1.barrier()
+
+qc1.x(1)
+qc1.x(0)
+qc1.cry(theta,0,2)
+qc1.cx(0,1)
+qc1.cry(-theta,1,2)
+qc1.cx(0,1)
+qc1.cry(theta,1,2)
 
 
-## Quantum Image decoder
+qc1.barrier()
 
-1. Must use as little 2 qubit gates as possible
-2. Must use a maximum of 16 qubits
-3. Using https://github.com/zalandoresearch/fashion-mnist database (https://qiskit.org/textbook/ch-applications/image-processing-frqi-neqr.html)
-4. Must have a py file with 3 functions : encode, decoder and run1
+qc1.x(1)
 
-## Quantum Image classifier
+qc1.cry(theta,0,2)
+qc1.cx(0,1)
+qc1.cry(-theta,1,2)
+qc1.cx(0,1)
+qc1.cry(theta,1,2)
 
-1. Must be quantum heavy
-2. Must use as little 2 qubit gates as possible
-3. Must be a Quantum Circuit dumped to a pickle file
+qc1.measure_all()
+
+qc1.draw()
